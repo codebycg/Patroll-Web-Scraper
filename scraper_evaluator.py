@@ -54,7 +54,7 @@ accuracy = (success_count / total) * 100 if total else 0
 mean_precision = sum(precision_scores) / len(precision_scores) if precision_scores else 0
 mean_recall = sum(recall_scores) / len(recall_scores) if recall_scores else 0
 
-print(f"\n📊 Evaluation Metrics:")
+print(f"\n Evaluation Metrics:")
 print(f"Total Contests Evaluated: {total}")
 print(f"Success Rate: {accuracy:.2f}%")
 print(f"Average Precision: {mean_precision:.2f}")
