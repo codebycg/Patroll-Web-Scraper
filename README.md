@@ -10,3 +10,8 @@ Each contest is stored on a <li> tag on the main page. The hierachy is strucutre
 ![image](https://github.com/user-attachments/assets/6e9b7792-2500-49bf-9130-66f5aed6792d)
 https://patroll.unifiedpatents.com/contests/mJ5QT4wkDCCjhy9xb
 This page always has "DOWNLOAD WINNING PRIOR ART:" with the link after 
+
+
+_For Summer 2025 Cohort Interns_
+Each of the files have descriptions added. An Updated README file will be added shortly....
+Browse through all files to get a better understanding of the code
