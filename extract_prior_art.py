@@ -56,9 +56,13 @@ def prior_art(contestlink,driver):
             
 
         for p_tag in p_tags:
-                if "Winning Submissions:" in p_tag.text:
-                    submissions_text = p_tag.text.split("Winning Submissions:")[1].strip()
-                    #splits by semi colon to find list of prior art
+            if "Winning Submissions:" in p_tag.text:
+                parts = p_tag.text.split("Winning Submissions:")
+                if len(parts) > 1:
+                    submissions_text = parts[1].strip()
+                    print("Split result:", parts)  # This is fine!
+                    
+                    # 🛠️ Split by semicolon properly here:
                     references = [ref.strip() for ref in submissions_text.split(';')]
                     prior_art_list.extend(references)
 
@@ -70,9 +74,8 @@ def prior_art(contestlink,driver):
         for link in patent_links:
             prior_art_list.append(link.text)
 
-    print(prior_art_list)
-    return '; '.join(prior_art_list)
+    return prior_art_list
 
 
     
-prior_art("https://patroll.unifiedpatents.com/contests/d4wk2MggiYTwqh4Qq",driver)
+prior_art("https://patroll.unifiedpatents.com/contests/d4wk2MggiYTwqh4Qq",webdriver)
