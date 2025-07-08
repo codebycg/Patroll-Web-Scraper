@@ -7,8 +7,8 @@ from bs4 import BeautifulSoup
 import time
 import json
 
-from contest_title import contest_title
-from prior_art import prior_art
+from extract_contest_title import contest_title
+from extract_prior_art import prior_art
 
 # Set up headless Chrome for main navigation
 options = Options()
@@ -25,7 +25,7 @@ driver.get(url)
 
 # Data containers
 results = []
-max_pages = 19
+max_pages = 3
 prefix = 'https://www.google.com'
 
 try:
@@ -53,9 +53,12 @@ try:
 
             try:
                 prior_arts = prior_art(contest_url, scraper)
+                if prior_arts is None:
+                    prior_arts = []
             except:
                 prior_arts = []
 
+            print(prior_arts)
             parsed_prior_art = []
             for art in prior_arts:
                 parsed_prior_art.append({
@@ -103,6 +106,8 @@ def simulated_patent_search(base_patent: str, winning_patents: list, prior_art_l
     return found_matches, success
 
 # Load workbook
+
+#error here sometimes
 excel_path = "PatentPlusAI Week 2 Deliverable.xlsx"
 wb = openpyxl.load_workbook(excel_path)
 sheet = wb["Scraped Contests"]
