@@ -6,9 +6,9 @@ from selenium.webdriver.support import expected_conditions as EC
 from bs4 import BeautifulSoup
 import time
 
-from contest_title import contest_title
-from prior_art import prior_art
-from to_csv import tocsv
+from extract_contest_title import contest_title
+from extract_prior_art import prior_art
+from generate_excel_output import tocsv
 # Set up headless Chrome browser
 options = Options()
 
