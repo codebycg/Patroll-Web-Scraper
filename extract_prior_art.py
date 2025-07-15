@@ -56,22 +56,21 @@ def prior_art(contestlink,driver):
             
 
         for p_tag in p_tags:
-                if "Winning Submissions:" in p_tag.text:
-                    submissions_text = p_tag.text.split("Winning Submissions:")[1].strip()
-                    #splits by semi colon to find list of prior art
+            if "Winning Submissions:" in p_tag.text:
+                parts = p_tag.text.split("Winning Submissions:")
+                if len(parts) > 1: 
+                    submissions_text = parts[1].strip()
                     references = [ref.strip() for ref in submissions_text.split(';')]
                     prior_art_list.extend(references)
 
+        #this is another style of the page: https://www.unifiedpatents.com/insights/2025/3/31/3000-awarded-in-second-cloud-native-heroes-challenge-on-patroll
+        if len(prior_art_list)==0:
+            patent_links = soup.find('ul', {'data-rte-list': 'default'}).find_all('a')
 
-    #this is another style of the page: https://www.unifiedpatents.com/insights/2025/3/31/3000-awarded-in-second-cloud-native-heroes-challenge-on-patroll
-    if len(prior_art_list)==0:
-        patent_links = soup.find('ul', {'data-rte-list': 'default'}).find_all('a')
+            for link in patent_links:
+                prior_art_list.append(link.text)
 
-        for link in patent_links:
-            prior_art_list.append(link.text)
-
-    print(prior_art_list)
-    return '; '.join(prior_art_list)
+    return prior_art_list
 
 
     
