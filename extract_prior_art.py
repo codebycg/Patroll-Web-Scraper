@@ -63,21 +63,12 @@ def prior_art(contestlink,driver):
                     references = [ref.strip() for ref in submissions_text.split(';')]
                     prior_art_list.extend(references)
 
-        if len(prior_art_list) == 0:
-            ul_tags = soup.find_all('ul', {'data-rte-list': 'default'})
-            for ul in ul_tags:
-                links = ul.find_all('a')
-                for link in links:
-                    #temp solution -- only works for US patents
-                    if link and link.text.startswith("US"): 
-                        prior_art_list.append(link.text.strip())
+        #this is another style of the page: https://www.unifiedpatents.com/insights/2025/3/31/3000-awarded-in-second-cloud-native-heroes-challenge-on-patroll
+        if len(prior_art_list)==0:
+            patent_links = soup.find('ul', {'data-rte-list': 'default'}).find_all('a')
 
-    #this is another style of the page: https://www.unifiedpatents.com/insights/2025/3/31/3000-awarded-in-second-cloud-native-heroes-challenge-on-patroll
-    if len(prior_art_list)==0:
-        patent_links = soup.find('ul', {'data-rte-list': 'default'}).find_all('a')
-
-        for link in patent_links:
-            prior_art_list.append(link.text)
+            for link in patent_links:
+                prior_art_list.append(link.text)
 
     return prior_art_list
 
