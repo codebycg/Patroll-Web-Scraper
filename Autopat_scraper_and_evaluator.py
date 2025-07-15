@@ -66,11 +66,13 @@ try:
         # Find the prior art, and contest title
         num = 1
         for a in contest_link:
+
             print(num, a)
             try:
                 priorArtID.append(prior_art(a, scraper))
             except:
                 priorArtID.append(0)
+
             # priorArtID.append(0)
             contestTitles.append(contest_title(a, scraper))
             # contestTitles.append(0)
