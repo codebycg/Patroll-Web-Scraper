@@ -66,12 +66,21 @@ try:
         # Find the prior art, and contest title
         num = 1
         for a in contest_link:
-
-            print(num, a)
+            print(num)
             try:
-                priorArtID.append(prior_art(a, scraper))
+                parsed_prior_art = prior_art(a, scraper)
             except:
-                priorArtID.append(0)
+                parsed_prior_art = []
+            if parsed_prior_art is None:
+                    parsed_prior_art = []
+            
+            prior_art_list = []
+            for art in parsed_prior_art:
+                prior_art_list.append({
+                    "patent_id": art,
+                    "country_code": art[:2]
+                })
+            priorArtID.append(prior_art_list)
 
             # priorArtID.append(0)
             contestTitles.append(contest_title(a, scraper))
