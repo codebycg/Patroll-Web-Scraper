@@ -58,14 +58,19 @@ def prior_art(contestlink,driver):
         for p_tag in p_tags:
             if "Winning Submissions:" in p_tag.text:
                 parts = p_tag.text.split("Winning Submissions:")
-                if len(parts) > 1:
+                if len(parts) > 1: 
                     submissions_text = parts[1].strip()
-                    print("Split result:", parts)  # This is fine!
-                    
-                    # 🛠️ Split by semicolon properly here:
                     references = [ref.strip() for ref in submissions_text.split(';')]
                     prior_art_list.extend(references)
 
+        if len(prior_art_list) == 0:
+            ul_tags = soup.find_all('ul', {'data-rte-list': 'default'})
+            for ul in ul_tags:
+                links = ul.find_all('a')
+                for link in links:
+                    #temp solution -- only works for US patents
+                    if link and link.text.startswith("US"): 
+                        prior_art_list.append(link.text.strip())
 
     #this is another style of the page: https://www.unifiedpatents.com/insights/2025/3/31/3000-awarded-in-second-cloud-native-heroes-challenge-on-patroll
     if len(prior_art_list)==0:
